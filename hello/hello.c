@@ -8,7 +8,7 @@ typedef struct Language
     char *message;
 } Language;
 
-int main(int argc, char const *argv[])
+int main()
 {
     Language english = {.name = "INGLES", .message = "HELLO"};
     Language spanish = {.name = "ESPANHOL", .message = "HOLA"};

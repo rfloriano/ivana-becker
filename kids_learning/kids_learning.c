@@ -34,7 +34,7 @@ const Number one = {.number = 1, .word = "one"};
 const Number two = {.number = 2, .word = "two"};
 const Number three = {.number = 3, .word = "three"};
 
-int main(int argc, char const *argv[])
+int main()
 {
     const Number numbers[] = {one, two, three};
     int wordsQnt;

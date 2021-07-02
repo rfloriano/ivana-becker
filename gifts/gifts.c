@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-int main(int argc, char const *argv[])
+int main()
 {
     int bag[3] = {20, 20, 20};
     int boxQnt;

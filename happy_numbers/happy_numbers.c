@@ -39,7 +39,7 @@ bool isHappyNumber(int n)
     return (slow == 1);
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
     int numberQnt;
     scanf("%d", &numberQnt);

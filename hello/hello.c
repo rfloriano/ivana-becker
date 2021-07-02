@@ -11,56 +11,16 @@ typedef struct Language
     char *message;
 } Language;
 
-/** 
- * @brief split string by delimiter
- * @param str string to split
- * @param delimiter character to split by
- * @return char**
- */
-char **split(char *str, const char delimiter)
+bool strIncludes(char *str, char c)
 {
-    char **result = 0;
-    size_t count = 0;
-    char *tmp = str;
-    char *last_comma = 0;
-    char delim[2];
-    delim[0] = delimiter;
-    delim[1] = 0;
-
-    /* Count how many elements will be extracted. */
-    while (*tmp)
+    for (int i = 0; i < strlen(str); i++)
     {
-        if (delimiter == *tmp)
+        if (c == str[i])
         {
-            count++;
-            last_comma = tmp;
+            return true;
         }
-        tmp++;
     }
-
-    /* Add space for trailing token. */
-    count += last_comma < (str + strlen(str) - 1);
-
-    /* Add space for terminating null string so caller
-       knows where the list of returned strings ends. */
-    count++;
-
-    result = malloc(sizeof(char *) * count);
-
-    if (result)
-    {
-        size_t idx = 0;
-        char *token = strtok(str, delim);
-
-        while (token)
-        {
-            *(result + idx++) = strdup(token);
-            token = strtok(0, delim);
-        }
-        *(result + idx) = 0;
-    }
-
-    return result;
+    return false;
 }
 
 int main()
@@ -72,28 +32,35 @@ int main()
     Language italian = {.name = "ITALIANO", .message = "CIAO"};
     Language russian = {.name = "RUSSO", .message = "ZDRAVSTVUJTE"};
     Language languages[] = {english, spanish, german, french, italian, russian};
-
-    char text[1000];
-    scanf("%[^#]", text);
-    char **lines = split(text, '\n');
-    for (int i = 0; *(lines + i); i++)
+    char *msg = "Caso %d:  %s\n";
+    int counter = 0;
+    char result[1000];
+    int size = 0;
+    while (true)
     {
-        bool found = false;
-        char *msg = "Caso %d:  %s\n";
-        for (int j = 0; j < sizeof(languages) / sizeof(*languages); j++)
+        char text[1000];
+        scanf("%s", text);
+        if (strIncludes(text, '#'))
         {
-            Language language = languages[j];
-            if (strcmp(language.message, lines[i]) != 0)
+            break;
+        }
+        bool found = false;
+        for (int i = 0; i < sizeof(languages) / sizeof(*languages); i++)
+        {
+            Language language = languages[i];
+            if (strcmp(language.message, text) != 0)
             {
                 continue;
             }
             found = true;
-            printf(msg, i + 1, language.name);
+            size += sprintf(result + size, msg, counter + 1, language.name);
         }
         if (!found)
         {
-            printf(msg, i + 1, "DESCONHECIDO");
+            size += sprintf(result + size, msg, counter + 1, "DESCONHECIDO");
         }
+        counter++;
     }
+    printf("%s", result);
     return 0;
 }

@@ -13,7 +13,7 @@ typedef struct Language
 
 bool strIncludes(char *str, char c)
 {
-    for (int i = 0; i < strlen(str); i++)
+    for (size_t i = 0; i < strlen(str); i++)
     {
         if (c == str[i])
         {
@@ -45,7 +45,7 @@ int main()
             break;
         }
         bool found = false;
-        for (int i = 0; i < sizeof(languages) / sizeof(*languages); i++)
+        for (int i = 0; i < 6; i++)
         {
             Language language = languages[i];
             if (strcmp(language.message, text) != 0)

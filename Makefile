@@ -7,7 +7,7 @@
 
 %.o: 
 	@$(MAKE) clean
-	@gcc $*/$*.c -o ./bin/$@
+	@gcc $*/$*.c -o ./bin/$@ -Wall -Wextra
 
 run-%: %.o
 	@./bin/$*.o

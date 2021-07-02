@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <ctype.h>
 
 /** 
@@ -11,6 +12,17 @@ void toUpper(char *p)
 {
     for (; *p; ++p)
         *p = toupper(*p);
+}
+
+/**
+ * @brief in-place converter to lower case
+ * @param p char pointer to convert
+ * @return void
+ */
+void toLower(char *p)
+{
+    for (; *p; ++p)
+        *p = tolower(*p);
 }
 
 /** 

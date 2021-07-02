@@ -1,3 +1,7 @@
+# local dirs
+.vscode
+bin
+
 # Prerequisites
 *.d
 

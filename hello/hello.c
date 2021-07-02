@@ -12,28 +12,6 @@ typedef struct Language
 } Language;
 
 /** 
- * @brief in-place converter to upper case
- * @param p char pointer to convert
- * @return void
- */
-void toUpper(char *p)
-{
-    for (; *p; ++p)
-        *p = toupper(*p);
-}
-
-/**
- * @brief in-place converter to lower case
- * @param p char pointer to convert
- * @return void
- */
-void toLower(char *p)
-{
-    for (; *p; ++p)
-        *p = tolower(*p);
-}
-
-/** 
  * @brief split string by delimiter
  * @param str string to split
  * @param delimiter character to split by
@@ -85,33 +63,6 @@ char **split(char *str, const char delimiter)
     return result;
 }
 
-/** 
- * @brief removes whitespace in a string
- * @param str string to remove whitespaces
- * @return char*
- */
-char *trim(char *str)
-{
-    char *end;
-
-    // Trim leading space
-    while (isspace((unsigned char)*str))
-        str++;
-
-    if (*str == 0) // All spaces?
-        return str;
-
-    // Trim trailing space
-    end = str + strlen(str) - 1;
-    while (end > str && isspace((unsigned char)*end))
-        end--;
-
-    // Write new null terminator character
-    end[1] = '\0';
-
-    return str;
-}
-
 int main()
 {
     Language english = {.name = "INGLES", .message = "HELLO"};
@@ -124,17 +75,15 @@ int main()
 
     char text[1000];
     scanf("%[^#]", text);
-    toUpper(text);
     char **lines = split(text, '\n');
     for (int i = 0; *(lines + i); i++)
     {
         bool found = false;
         char *msg = "Caso %d:  %s\n";
-        char *line = trim(lines[i]);
         for (int j = 0; j < sizeof(languages) / sizeof(*languages); j++)
         {
             Language language = languages[j];
-            if (strcmp(language.message, line) != 0)
+            if (strcmp(language.message, lines[i]) != 0)
             {
                 continue;
             }

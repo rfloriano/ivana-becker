@@ -134,12 +134,11 @@ bool wordsAreSimilar(char *string1, char *string2, int threshold)
     return missed <= threshold;
 }
 
-const Number one = {.number = 1, .word = "one"};
-const Number two = {.number = 2, .word = "two"};
-const Number three = {.number = 3, .word = "three"};
-
 int main()
 {
+    const Number one = {.number = 1, .word = "one"};
+    const Number two = {.number = 2, .word = "two"};
+    const Number three = {.number = 3, .word = "three"};
     const Number numbers[] = {one, two, three};
     int wordsQnt;
     scanf("%d", &wordsQnt);
